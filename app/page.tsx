@@ -1,18 +1,36 @@
-"use client"
-import React from 'react';
+'use client'
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import ParticlesContainer from './ParticlesContainer';
 
 const DemoPage = () => {
+  const [typedText, setTypedText] = useState('');
+  const fullText = "Welcome to BitBox";
+
+  useEffect(() => {
+    let currentIndex = 0;
+
+    const intervalId = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setTypedText(fullText.substring(0, currentIndex));
+        currentIndex += 1;
+      } else {
+        clearInterval(intervalId);
+      }
+    }, 70); // Adjust typing speed by changing the interval
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [fullText]);
+
   return (
     <div className="h-full flex items-center justify-center mt-24 relative">
-      <ParticlesContainer/>
+      <ParticlesContainer />
       <div className="rounded-lg p-8 max-w-md w-full flex flex-col items-center relative z-10">
-        <h1 className="text-9xl font-bold mb-24 text-white">
-          Welcome to{' '}
-          <span className="border-t-4 border-r-4 border-b-4 border-l-4 border-gradient-to-r from-cyan-500 to-blue-500 border-blue-300">
-            BitBox
-          </span>{' '}
+        <h1 className="text-9xl font-bold mb-24 text-white relative">
+          {typedText}
+          <span className="border-box-animation"></span>
         </h1>
         <p className="mb-6 text-white">
           BitBox is your coding platform and grading platform of the future.
