@@ -28,9 +28,14 @@ const ProjectsPage: React.FC = () => {
 
         await fetchProjects()
     }
+    const handleManageClick = async () => {
+       //Manage Modal
+    }
     return (
         <div>
+            
             <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                
                 {projects.map((project) => (
                     <li
                         key={project._id}
@@ -39,6 +44,15 @@ const ProjectsPage: React.FC = () => {
                         <Link href={`/projects/${project._id}`}>
                             <h2 className='text-2xl font-bold mb-2'>{project.title}</h2>
                         </Link>
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                        height="1em" 
+                        viewBox="0 0 448 512"
+                        className='w-6 h-6 text-black-100 ml-auto cursor-pointer mb-3'
+                        onClick={(e) => handleManageClick()}
+                        >
+
+      <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+    </svg>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             fill='none'
